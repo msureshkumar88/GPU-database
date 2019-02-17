@@ -1,0 +1,23 @@
+{% include '/includes/header.html' %}
+<form method="post" action="/gpu/new">
+
+    {% for err in errors %}
+        <div>{{err}}</div>
+    {% endfor %}
+    Name:<input type="text" name="name"/>
+    <br/>
+    Manufacturer:<input type="text" name="manufacturer"/>
+    <br/>
+    date issued:<input type="date" name="date" onkeydown="return false" />
+    <br/>
+    <br/>
+    <input type="checkbox" name="geometryShader" value="yes">Geometry Shader<br>
+    <input type="checkbox" name="tesselationShader" value="yes">Tesselation Shader,<br>
+    <input type="checkbox" name="shaderInt16" value="yes">ShaderInt 16<br>
+    <input type="checkbox" name="sparseBinding" value="yes">Sparse Binding<br>
+    <input type="checkbox" name="textureCompressionETC2" value="yes">Texture Compression ETC2<br>
+    <input type="checkbox" name="vertexPipelineStoresAndAtomics" value="yes">Vertex Pipeline Stores And Atomics<br>
+    <input type="submit"/>
+    <input type="hidden" name="form" value="new_gpu">
+</form>
+{% include '/includes/footer.html' %}
