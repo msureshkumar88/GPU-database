@@ -7,5 +7,18 @@ libraries:
   version: latest
 
 handlers:
-- url: /.*
-  script: main.app
+- url: /
+  script: home.app
+
+- url: /login
+  script: login.app
+
+- url: /gpu
+  script: gpu.app
+
+- url: /gpu/new
+  script: gpu.app
+
+- url: /gpu/update
+  script: gpu.app
+
