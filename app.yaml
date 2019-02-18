@@ -10,9 +10,6 @@ handlers:
 - url: /
   script: home.app
 
-- url: /login
-  script: login.app
-
 - url: /gpu
   script: gpu.app
 
