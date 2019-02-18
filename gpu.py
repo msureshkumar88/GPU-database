@@ -14,9 +14,11 @@ class GpuPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         path = self.request.path
-
-        if len(self.request.params) !=0:
-            logging.info(self.request.params['gpu_name'])
+        params = self.request.params
+        if len(params) > 0 and 'gpu_name' not in params:
+            # logging.info(self.request.params['gpu_name'])
+            self.redirect('/gpu')
+            return
         if path == "/gpu":
             self.index()
         elif path == "/gpu/new":
@@ -28,8 +30,8 @@ class GpuPage(webapp2.RequestHandler):
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
         formName = self.request.get('form')
-        if formName == "new_gpu":
-            self.new_gpu_post()
+        if formName == "new_gpu" or formName == "edit_gpu":
+            self.new_gpu_post(formName)
 
     def index(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
@@ -39,7 +41,7 @@ class GpuPage(webapp2.RequestHandler):
         for val in query.fetch(projection=[GpuModel.name]):
             logging.info(val.name)
         data = {
-            "gpus" : gpus
+            "gpus": gpus
         }
         self.response.write(template.render(data))
 
@@ -48,10 +50,20 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render({}))
 
     def edit_gpu_get(self):
-        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
-        self.response.write(template.render({}))
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
+        query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
+        gpu = query.fetch()
+        logging.info(gpu)
+        if len(gpu) == 0:
+            self.redirect('/gpu')
+            return
+        data = {
+            "gpu": gpu[0]
+        }
+        logging.info(gpu[0].name)
+        self.response.write(template.render(data))
 
-    def new_gpu_post(self):
+    def new_gpu_post(self, form_name):
         GpuPage.errors = []
 
         geometryShader = False
@@ -79,8 +91,11 @@ class GpuPage(webapp2.RequestHandler):
             vertexPipelineStoresAndAtomics = True
 
         name = self.request.get('name')
-        if Validation.is_empty(name):
+        if form_name != "edit_gpu" and Validation.is_empty(name):
             GpuPage.errors.append('GPU name can not be empty')
+
+        if form_name == "edit_gpu":
+            name = self.request.params['gpu_name']
 
         manufacturer = self.request.get('manufacturer')
         if Validation.is_empty(manufacturer):
@@ -89,11 +104,15 @@ class GpuPage(webapp2.RequestHandler):
         date = self.request.get('date')
         if Validation.is_empty(date):
             GpuPage.errors.append('Manufactured date can not be empty')
-
+        if form_name == "edit_gpu":
+            GpuModel_key = ndb.Key('GpuModel', name)
+            Gpu = GpuModel_key.get()
+            if Gpu == None:
+                self.redirect("/gpu")
         if len(GpuPage.errors) == 0:
             GpuModel_key = ndb.Key('GpuModel', name)
             Gpu = GpuModel_key.get()
-            if Gpu != None:
+            if form_name == "new_gpu" and Gpu != None:
                 GpuPage.errors.append("thia gpu already exist")
             else:
                 newGpu = GpuModel(id=name, name=name, manufacturer=manufacturer,
@@ -105,10 +124,19 @@ class GpuPage(webapp2.RequestHandler):
 
                 newGpu.put()
 
-        data = {
-            "errors": GpuPage.errors
-        }
-        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
+        if form_name == "new_gpu":
+            template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
+            data = {
+                "errors": GpuPage.errors
+            }
+        else:
+            query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
+            gpu = query.fetch()
+            data = {
+                "gpu": gpu[0],
+                "errors": GpuPage.errors
+            }
+            template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
         self.response.write(template.render(data))
 
 
