@@ -14,10 +14,15 @@ class GpuPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         path = self.request.path
+
+        if len(self.request.params) !=0:
+            logging.info(self.request.params['gpu_name'])
         if path == "/gpu":
             self.index()
         elif path == "/gpu/new":
             self.new_gpu_get()
+        elif "/gpu/edit" in path:
+            self.edit_gpu_get()
         logging.info(self.request.path)
 
     def post(self):
@@ -28,9 +33,21 @@ class GpuPage(webapp2.RequestHandler):
 
     def index(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
-        self.response.write(template.render({}))
+        query = GpuModel.query()
+        gpus = query.fetch()
+        logging.info(query.fetch(projection=[GpuModel.name]))
+        for val in query.fetch(projection=[GpuModel.name]):
+            logging.info(val.name)
+        data = {
+            "gpus" : gpus
+        }
+        self.response.write(template.render(data))
 
     def new_gpu_get(self):
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
+        self.response.write(template.render({}))
+
+    def edit_gpu_get(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
         self.response.write(template.render({}))
 
@@ -98,5 +115,5 @@ class GpuPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/gpu', GpuPage),
     ('/gpu/new', GpuPage),
-    ('/gpu/update', GpuPage)
+    ('/gpu/edit', GpuPage)
 ], debug=True)

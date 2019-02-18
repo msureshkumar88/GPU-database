@@ -16,6 +16,6 @@ handlers:
 - url: /gpu/new
   script: gpu.app
 
-- url: /gpu/update
+- url: /gpu/edit
   script: gpu.app
 
