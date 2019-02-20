@@ -19,3 +19,14 @@ handlers:
 - url: /gpu/edit
   script: gpu.app
 
+- url: /gpu/view
+  script: gpu.app
+
+- url: /gpu/search
+  script: gpu.app
+
+- url: /gpu/compare
+  script: gpu.app
+
+- url: /gpu/selection
+  script: gpu.app

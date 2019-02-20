@@ -25,6 +25,14 @@ class GpuPage(webapp2.RequestHandler):
             self.new_gpu_get()
         elif "/gpu/edit" in path:
             self.edit_gpu_get()
+        elif path == "/gpu/view":
+            self.get_view()
+        elif path == "/gpu/search":
+            self.get_search()
+        elif path == "/gpu/compare":
+            self.get_compare()
+        elif path == "/gpu/selection":
+            self.get_compare()
         logging.info(self.request.path)
 
     def post(self):
@@ -32,6 +40,9 @@ class GpuPage(webapp2.RequestHandler):
         formName = self.request.get('form')
         if formName == "new_gpu" or formName == "edit_gpu":
             self.new_gpu_post(formName)
+        elif formName == "search_feature":
+            self.post_search()
+
 
     def index(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
@@ -139,9 +150,28 @@ class GpuPage(webapp2.RequestHandler):
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
         self.response.write(template.render(data))
 
+    def get_view(self):
+        pass
+
+    def get_search(self):
+        pass
+
+    def get_gpu_selection(self):
+        pass
+
+    def get_compare(self):
+        pass
+
+    def post_search(self):
+        pass
+
 
 app = webapp2.WSGIApplication([
     ('/gpu', GpuPage),
     ('/gpu/new', GpuPage),
-    ('/gpu/edit', GpuPage)
+    ('/gpu/edit', GpuPage),
+    ('/gpu/view', GpuPage),
+    ('/gpu/search', GpuPage),
+    ('/gpu/compare', GpuPage),
+    ('/gpu/selection', GpuPage)
 ], debug=True)
