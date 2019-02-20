@@ -1,30 +1,48 @@
 {% include '/includes/header.html' %}
 <h2>compare gpu</h2>
 
-<table style="width:100%">
+<table style="width:50%">
     <tr>
-        <th>Gpu 1</th>
-        <th>gpu 2</th>
+        <th>{{gpu1.name}}</th>
+        <th></th>
+        <th>{{gpu2.name}}</th>
+        <th></th>
     </tr>
     <tr>
-        <td>Jill</td>
-        <td>Smith</td>
+        <td>Geometry Shader: </td>
+        <td>{{gpu1.geometryShader}}</td>
+        <td>Geometry Shader: </td>
+        <td>{{gpu2.geometryShader}}</td>
     </tr>
     <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
+        <td>Tesselation Shader: {{gpu1.tesselationShader}}</td>
+        <td>{{gpu1.tesselationShader}}</td>
+        <td>Tesselation Shader: {{gpu2.tesselationShader}}</td>
+        <td>{{gpu2.tesselationShader}}</td>
     </tr>
     <tr>
-        <td>John</td>
-        <td>Doe</td>
+        <td>Shader Int16:</td>
+        <td> {{gpu1.shaderInt16}}</td>
+        <td>Shader Int16: </td>
+        <td>{{gpu2.shaderInt16}}</td>
     </tr>
     <tr>
-        <td>John</td>
-        <td>Doe</td>
+        <td>Sparse Binding: </td>
+        <td>{{gpu1.sparseBinding}}</td>
+        <td>Sparse Binding: </td>
+        <td>{{gpu2.sparseBinding}}</td>
     </tr>
     <tr>
-        <td>John</td>
-        <td>Doe</td>
+        <td>Texture Compression ETC2: </td>
+        <td>{{gpu1.textureCompressionETC2}}</td>
+        <td>Texture Compression ETC2: </td>
+        <td>{{gpu2.textureCompressionETC2}}</td>
+    </tr>
+    <tr>
+        <td>Vertex Pipeline Stores and Atomics: </td>
+        <td>{{gpu1.vertexPipelineStoresAndAtomics}}</td>
+        <td>Vertex Pipeline Stores and Atomics: </td>
+        <td>{{gpu2.vertexPipelineStoresAndAtomics}}</td>
     </tr>
 </table>
 

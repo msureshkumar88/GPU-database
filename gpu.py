@@ -214,7 +214,7 @@ class GpuPage(webapp2.RequestHandler):
             "gpu1": Gpu1,
             "gpu2": Gpu2
         }
-        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/compare.html')
         self.response.write(template.render(data))
 
     def post_search(self):
