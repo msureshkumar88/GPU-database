@@ -2,7 +2,7 @@
 gpu list
 <ul>
 {% for val in gpus %}
-  <li><a href="gpu/edit?gpu_name={{ val.name }}">{{ val.name }}</a></li>
+  <li><a href="gpu/view?gpu_name={{ val.name }}">{{ val.name }}</a></li>
 {% endfor %}
 </ul>
 {% include '/includes/footer.html' %}

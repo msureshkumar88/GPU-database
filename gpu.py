@@ -25,7 +25,7 @@ class GpuPage(webapp2.RequestHandler):
             self.new_gpu_get()
         elif "/gpu/edit" in path:
             self.edit_gpu_get()
-        elif path == "/gpu/view":
+        elif "/gpu/view" in path:
             self.get_view()
         elif path == "/gpu/search":
             self.get_search()
@@ -151,7 +151,18 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def get_view(self):
-        pass
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/view.html')
+        query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
+        gpu = query.fetch()
+        logging.info(gpu)
+        if len(gpu) == 0:
+            self.redirect('/gpu')
+            return
+        data = {
+            "gpu": gpu[0]
+        }
+        logging.info(gpu[0].name)
+        self.response.write(template.render(data))
 
     def get_search(self):
         pass
