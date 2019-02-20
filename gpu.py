@@ -14,11 +14,7 @@ class GpuPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         path = self.request.path
-        params = self.request.params
-        if len(params) > 0 and 'gpu_name' not in params:
-            # logging.info(self.request.params['gpu_name'])
-            self.redirect('/gpu')
-            return
+
         if path == "/gpu":
             self.index()
         elif path == "/gpu/new":
@@ -29,20 +25,22 @@ class GpuPage(webapp2.RequestHandler):
             self.get_view()
         elif path == "/gpu/search":
             self.get_search()
-        elif path == "/gpu/compare":
+        elif "/gpu/compare" in path:
             self.get_compare()
         elif path == "/gpu/selection":
-            self.get_compare()
+            self.gpu_selection()
         logging.info(self.request.path)
 
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
         formName = self.request.get('form')
+        logging.info(formName)
         if formName == "new_gpu" or formName == "edit_gpu":
             self.new_gpu_post(formName)
         elif formName == "search_feature":
             self.post_search()
-
+        elif formName == "compare_gpu":
+            self.gpu_selection()
 
     def index(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
@@ -57,6 +55,11 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def new_gpu_get(self):
+        params = self.request.params
+        if len(params) > 0 and 'gpu_name' not in params:
+            # logging.info(self.request.params['gpu_name'])
+            self.redirect('/gpu')
+            return
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
         self.response.write(template.render({}))
 
@@ -151,6 +154,11 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def get_view(self):
+        params = self.request.params
+        if len(params) > 0 and 'gpu_name' not in params:
+            # logging.info(self.request.params['gpu_name'])
+            self.redirect('/gpu')
+            return
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/view.html')
         query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
         gpu = query.fetch()
@@ -167,11 +175,47 @@ class GpuPage(webapp2.RequestHandler):
     def get_search(self):
         pass
 
-    def get_gpu_selection(self):
-        pass
+    def gpu_selection(self):
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
+        query = GpuModel.query(projection=[GpuModel.name])
+        logging.info(query)
+        form = self.request.get('form')
+        gpu1 = self.request.get('gpu1')
+        gpu2 = self.request.get('gpu2')
+        error = []
+        if form:
+            if gpu1 == gpu2:
+                error.append("Please select two type of GPUs to compare")
+            else:
+                self.redirect('/gpu/compare?' + "gpu1=" + gpu1 + "&" + "gpu2=" + gpu2)
+                return
+        data = {
+            "gpus": query,
+            "errors": error
+        }
+        self.response.write(template.render(data))
 
     def get_compare(self):
-        pass
+        params = self.request.params
+        if len(params) > 0 and 'gpu1' not in params or 'gpu2' not in params:
+            # logging.info(self.request.params['gpu_name'])
+            self.redirect('/gpu')
+            return
+        gpu1_key = ndb.Key('GpuModel', params['gpu1'])
+        Gpu1 = gpu1_key.get()
+
+        gpu2_key = ndb.Key('GpuModel', params['gpu2'])
+        Gpu2 = gpu2_key.get()
+
+        if not Gpu1 or not Gpu2:
+            self.redirect("/gpu")
+            return
+        data = {
+            "gpu1": Gpu1,
+            "gpu2": Gpu2
+        }
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
+        self.response.write(template.render(data))
 
     def post_search(self):
         pass

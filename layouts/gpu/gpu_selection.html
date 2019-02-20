@@ -1,13 +1,23 @@
 {% include '/includes/header.html' %}
 <h2>Compares GPu Features</h2>
 <div>
-    <select name="gpu1">
-        <option value="volvo">Volvo</option>
-    </select>
-    <select name="gpu2">
-        <option value="volvo">Volvo</option>
-    </select>
-    <a href="#">Compare</a>
+    {% for err in errors %}
+        <div>{{err}}</div>
+    {% endfor %}
+    <form method="post" action="/gpu/selection" name="compare">
+        <select name="gpu1">
+            {% for gpu in gpus %}
+            <option value="{{gpu.name}}">{{gpu.name}}</option>
+            {% endfor %}
+        </select>
+        <select name="gpu2">
+            {% for gpu in gpus %}
+            <option value="{{gpu.name}}">{{gpu.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="form" value="compare_gpu">
+        <input type="submit">
+    </form>
 </div>
 
 {% include '/includes/footer.html' %}
