@@ -1,0 +1,23 @@
+{% include '/includes/header.html' %}
+<h1>View GPU</h1>
+<div>
+    {% for err in errors %}
+        <div>{{err}}</div>
+    {% endfor %}
+    Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>
+    <br/>
+    Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}" disabled/>
+    <br/>
+    date issued:<input type="date" name="date" onkeydown="return false"  value="{{gpu.date}}" disabled/>
+    <br/>
+    <br/>
+    <input type="checkbox" disabled name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry Shader<br>
+    <input type="checkbox" disabled name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation Shader,<br>
+    <input type="checkbox" disabled name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>
+    <input type="checkbox" disabled name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse Binding<br>
+    <input type="checkbox" disabled name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif %}>Texture Compression ETC2<br>
+    <input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>
+    <a href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>
+</div>
+
+{% include '/includes/footer.html' %}
