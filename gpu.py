@@ -146,21 +146,28 @@ class GpuPage(webapp2.RequestHandler):
 
                 newGpu.put()
         user = User.get_user(self)
+        message = ""
         if form_name == "new_gpu":
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
+            if not GpuPage.errors:
+                message = "GPU saved successfully"
             data = {
                 "errors": GpuPage.errors,
                 'url': user["url"],
                 'url_string': user['url_string'],
+                'message': message
             }
         else:
             query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
             gpu = query.fetch()
+            if not GpuPage.errors:
+                message = "GPU updated successfully"
             data = {
                 "gpu": gpu[0],
                 "errors": GpuPage.errors,
                 'url': user["url"],
                 'url_string': user['url_string'],
+                'message': message
             }
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
 

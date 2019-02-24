@@ -15,7 +15,7 @@ class HomePage(webapp2.RequestHandler):
         url_string = ''
         if user:
             url = users.create_logout_url(self.request.uri)
-            url_string = 'logout'
+            url_string = 'Logout'
             myuser_key = ndb.Key('UserModel', user.email())
             myuser = myuser_key.get()
             logging.info(myuser)

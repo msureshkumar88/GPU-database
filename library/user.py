@@ -10,7 +10,7 @@ class User:
         url_string = ''
         if user:
             url = users.create_logout_url(current_user.request.uri)
-            url_string = 'logout'
+            url_string = 'Logout'
         else:
             url = users.create_login_url(current_user.request.uri)
             url_string = 'login'
