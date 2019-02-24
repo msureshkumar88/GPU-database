@@ -10,39 +10,39 @@
     </tr>
     <tr>
         <td>Geometry Shader: </td>
-        <td>{{gpu1.geometryShader}}</td>
+        <td>{% if gpu1.geometryShader %} Yes {% else %} No {% endif %}</td>
         <td>Geometry Shader: </td>
-        <td>{{gpu2.geometryShader}}</td>
+        <td>{% if gpu2.geometryShader %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
-        <td>Tesselation Shader: {{gpu1.tesselationShader}}</td>
-        <td>{{gpu1.tesselationShader}}</td>
+        <td>Tesselation Shader: </td>
+        <td>{% if gpu1.tesselationShader %} Yes {% else %} No {% endif %}</td>
         <td>Tesselation Shader: {{gpu2.tesselationShader}}</td>
-        <td>{{gpu2.tesselationShader}}</td>
+        <td>{% if gpu2.tesselationShader %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
         <td>Shader Int16:</td>
-        <td> {{gpu1.shaderInt16}}</td>
+        <td> {% if gpu1.shaderInt16 %} Yes {% else %} No {% endif %}</td>
         <td>Shader Int16: </td>
-        <td>{{gpu2.shaderInt16}}</td>
+        <td>{% if gpu2.shaderInt16 %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
         <td>Sparse Binding: </td>
-        <td>{{gpu1.sparseBinding}}</td>
+        <td>{% if gpu1.sparseBinding %} Yes {% else %} No {% endif %}</td>
         <td>Sparse Binding: </td>
-        <td>{{gpu2.sparseBinding}}</td>
+        <td>{% if gpu2.sparseBinding %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
         <td>Texture Compression ETC2: </td>
-        <td>{{gpu1.textureCompressionETC2}}</td>
+        <td>{% if gpu1.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>
         <td>Texture Compression ETC2: </td>
-        <td>{{gpu2.textureCompressionETC2}}</td>
+        <td>{% if gpu2.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
         <td>Vertex Pipeline Stores and Atomics: </td>
-        <td>{{gpu1.vertexPipelineStoresAndAtomics}}</td>
+        <td>{% if gpu1.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>
         <td>Vertex Pipeline Stores and Atomics: </td>
-        <td>{{gpu2.vertexPipelineStoresAndAtomics}}</td>
+        <td>{% if gpu2.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>
     </tr>
 </table>
 
