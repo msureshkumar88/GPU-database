@@ -173,7 +173,8 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def get_search(self):
-        pass
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/search.html')
+        self.response.write(template.render({}))
 
     def gpu_selection(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
@@ -218,7 +219,37 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def post_search(self):
-        pass
+        params = []
+        error = ""
+        if self.request.get('geometryShader'):
+            params.append(GpuModel.geometryShader == True)
+
+        if self.request.get('tesselationShader'):
+            params.append(GpuModel.tesselationShader == True)
+
+        if self.request.get('shaderInt16'):
+            params.append(GpuModel.shaderInt16 == True)
+
+        if self.request.get('sparseBinding'):
+            params.append(GpuModel.sparseBinding == True)
+
+        if self.request.get('textureCompressionETC2'):
+            params.append(GpuModel.textureCompressionETC2 == True)
+
+        if self.request.get('vertexPipelineStoresAndAtomics'):
+            params.append(GpuModel.vertexPipelineStoresAndAtomics == True)
+
+        result = []
+        if len(params) == 0:
+            error = "Please select an option"
+        else:
+            query = GpuModel.query(*params)
+            result = query.fetch()
+            if len(result) == 0:
+                error = "There is no GPU available with this selection"
+
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/search.html')
+        self.response.write(template.render({"results":result,"errors":error}))
 
 
 app = webapp2.WSGIApplication([

@@ -1,12 +1,27 @@
 {% include '/includes/header.html' %}
 <h2>Search GPU by Features</h2>
 <div>
-    <input type="checkbox" disabled name="geometryShader" value="yes">Geometry Shader
-    <input type="checkbox" disabled name="tesselationShader" value="yes">Tesselation Shader,
-    <input type="checkbox" disabled name="shaderInt16" value="yes">ShaderInt 16
-    <input type="checkbox" disabled name="sparseBinding" value="yes">Sparse Binding
-    <input type="checkbox" disabled name="textureCompressionETC2" value="yes">Texture Compression ETC2
-    <input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes">Vertex Pipeline Stores And Atomics
-</div>
 
+    {% if errors %}
+        {{errors}}
+    {% endif %}
+    <form name="search" method="post" action="">
+        <input type="checkbox" name="geometryShader" value="yes">Geometry Shader
+        <input type="checkbox" name="tesselationShader" value="yes">Tesselation Shader,
+        <input type="checkbox" name="shaderInt16" value="yes">ShaderInt 16
+        <input type="checkbox" name="sparseBinding" value="yes">Sparse Binding
+        <input type="checkbox" name="textureCompressionETC2" value="yes">Texture Compression ETC2
+        <input type="checkbox" name="vertexPipelineStoresAndAtomics" value="yes">Vertex Pipeline Stores And Atomics
+        <input type="hidden" name="form" value="search_feature">
+        <input type="submit" value="Search">
+    </form>
+
+</div>
+<div>
+    <ul>
+        {% for result in results %}
+            <li>{{result.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% include '/includes/footer.html' %}
