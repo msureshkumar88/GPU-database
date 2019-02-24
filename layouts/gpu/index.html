@@ -1,8 +1,23 @@
-{% include '/includes/header.html' %}
+<!--{% include '/includes/header.html' %}-->
+<!--gpu list-->
+<!--<ul>-->
+<!--{% for val in gpus %}-->
+<!--<li><a href="gpu/view?gpu_name={{ val.name }}">{{ val.name }}</a></li>-->
+<!--{% endfor %}-->
+<!--</ul>-->
+<!--{% include '/includes/footer.html' %}-->
+
+{% extends "/includes/base.html" %}
+{% block title %}View GPU{% endblock %}
+{% block head %}
+{% endblock %}
+{% block user_url %}{{url}}{% endblock %}{% block user_text %}{{url_string}}{% endblock %}
+
+{% block content %}
 gpu list
 <ul>
-{% for val in gpus %}
-  <li><a href="gpu/view?gpu_name={{ val.name }}">{{ val.name }}</a></li>
-{% endfor %}
+    {% for val in gpus %}
+    <li><a href="gpu/view?gpu_name={{ val.name }}">{{ val.name }}</a></li>
+    {% endfor %}
 </ul>
-{% include '/includes/footer.html' %}
+{% endblock %}

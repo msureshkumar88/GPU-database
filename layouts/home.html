@@ -1,4 +1,14 @@
-{% include '/includes/header.html' %}
-home page
-<p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>
-{% include '/includes/footer.html' %}
+<!--{% include '/includes/header.html' %}-->
+<!--home page-->
+<!--<p>you can {{ url_string }} <a href='{{ url }}'>here</a></p>-->
+<!--{% include '/includes/footer.html' %}-->
+
+{% extends "/includes/base.html" %}
+{% block title %}GPU DB{% endblock %}
+{% block user_url %}{{url}}{% endblock %}{% block user_text %}{{url_string}}{% endblock %}
+{% block content %}
+    <h1>Index</h1>
+    <p class="important">
+      Welcome to my awesome homepage.
+    </p>
+{% endblock %}

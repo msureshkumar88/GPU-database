@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+    <link type="text/css" rel="stylesheet" href="/assets/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">GPUDB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/gpu">GPU</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/gpu/new">New GPU</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/gpu/selection">Compare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/gpu/search">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% block user_url %}{% endblock %}">{% block user_text %}{% endblock %}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="content">{% block content %}{% endblock %}</div>
+<div id="footer">
+    {% block footer %}
+    &copy; Copyright 2008 by <a href="http://domain.invalid/">you</a>.
+    {% endblock %}
+</div>
+</body>
+</html>

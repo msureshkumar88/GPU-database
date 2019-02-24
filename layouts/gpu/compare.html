@@ -1,4 +1,60 @@
-{% include '/includes/header.html' %}
+<!--{% include '/includes/header.html' %}-->
+<!--<h2>compare gpu</h2>-->
+
+<!--<table style="width:50%">-->
+<!--<tr>-->
+<!--<th>{{gpu1.name}}</th>-->
+<!--<th></th>-->
+<!--<th>{{gpu2.name}}</th>-->
+<!--<th></th>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Geometry Shader: </td>-->
+<!--<td>{% if gpu1.geometryShader %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Geometry Shader: </td>-->
+<!--<td>{% if gpu2.geometryShader %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Tesselation Shader: </td>-->
+<!--<td>{% if gpu1.tesselationShader %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Tesselation Shader: {{gpu2.tesselationShader}}</td>-->
+<!--<td>{% if gpu2.tesselationShader %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Shader Int16:</td>-->
+<!--<td> {% if gpu1.shaderInt16 %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Shader Int16: </td>-->
+<!--<td>{% if gpu2.shaderInt16 %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Sparse Binding: </td>-->
+<!--<td>{% if gpu1.sparseBinding %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Sparse Binding: </td>-->
+<!--<td>{% if gpu2.sparseBinding %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Texture Compression ETC2: </td>-->
+<!--<td>{% if gpu1.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Texture Compression ETC2: </td>-->
+<!--<td>{% if gpu2.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>Vertex Pipeline Stores and Atomics: </td>-->
+<!--<td>{% if gpu1.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>-->
+<!--<td>Vertex Pipeline Stores and Atomics: </td>-->
+<!--<td>{% if gpu2.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>-->
+<!--</tr>-->
+<!--</table>-->
+
+<!--{% include '/includes/footer.html' %}-->
+
+{% extends "/includes/base.html" %}
+{% block title %}View GPU{% endblock %}
+{% block head %}
+{% endblock %}
+{% block user_url %}{{url}}{% endblock %}{% block user_text %}{{url_string}}{% endblock %}
+
+{% block content %}
 <h2>compare gpu</h2>
 
 <table style="width:50%">
@@ -9,13 +65,13 @@
         <th></th>
     </tr>
     <tr>
-        <td>Geometry Shader: </td>
+        <td>Geometry Shader:</td>
         <td>{% if gpu1.geometryShader %} Yes {% else %} No {% endif %}</td>
-        <td>Geometry Shader: </td>
+        <td>Geometry Shader:</td>
         <td>{% if gpu2.geometryShader %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
-        <td>Tesselation Shader: </td>
+        <td>Tesselation Shader:</td>
         <td>{% if gpu1.tesselationShader %} Yes {% else %} No {% endif %}</td>
         <td>Tesselation Shader: {{gpu2.tesselationShader}}</td>
         <td>{% if gpu2.tesselationShader %} Yes {% else %} No {% endif %}</td>
@@ -23,27 +79,26 @@
     <tr>
         <td>Shader Int16:</td>
         <td> {% if gpu1.shaderInt16 %} Yes {% else %} No {% endif %}</td>
-        <td>Shader Int16: </td>
+        <td>Shader Int16:</td>
         <td>{% if gpu2.shaderInt16 %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
-        <td>Sparse Binding: </td>
+        <td>Sparse Binding:</td>
         <td>{% if gpu1.sparseBinding %} Yes {% else %} No {% endif %}</td>
-        <td>Sparse Binding: </td>
+        <td>Sparse Binding:</td>
         <td>{% if gpu2.sparseBinding %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
-        <td>Texture Compression ETC2: </td>
+        <td>Texture Compression ETC2:</td>
         <td>{% if gpu1.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>
-        <td>Texture Compression ETC2: </td>
+        <td>Texture Compression ETC2:</td>
         <td>{% if gpu2.textureCompressionETC2 %} Yes {% else %} No {% endif %}</td>
     </tr>
     <tr>
-        <td>Vertex Pipeline Stores and Atomics: </td>
+        <td>Vertex Pipeline Stores and Atomics:</td>
         <td>{% if gpu1.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>
-        <td>Vertex Pipeline Stores and Atomics: </td>
+        <td>Vertex Pipeline Stores and Atomics:</td>
         <td>{% if gpu2.vertexPipelineStoresAndAtomics %} Yes {% else %} No {% endif %}</td>
     </tr>
 </table>
-
-{% include '/includes/footer.html' %}
+{% endblock %}

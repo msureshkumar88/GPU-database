@@ -5,7 +5,7 @@ from gpuModel import GpuModel
 from google.appengine.ext import ndb
 from library.validation import Validation
 import datetime
-
+from library.user import User
 
 class GpuPage(webapp2.RequestHandler):
     template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
@@ -49,8 +49,12 @@ class GpuPage(webapp2.RequestHandler):
         logging.info(query.fetch(projection=[GpuModel.name]))
         for val in query.fetch(projection=[GpuModel.name]):
             logging.info(val.name)
+
+        user = User.get_user(self)
         data = {
-            "gpus": gpus
+            "gpus": gpus,
+            'url': user["url"],
+            'url_string': user['url_string'],
         }
         self.response.write(template.render(data))
 
@@ -60,8 +64,9 @@ class GpuPage(webapp2.RequestHandler):
             # logging.info(self.request.params['gpu_name'])
             self.redirect('/gpu')
             return
+        user = User.get_user(self)
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
-        self.response.write(template.render({}))
+        self.response.write(template.render({'url': user["url"],'url_string': user['url_string']}))
 
     def edit_gpu_get(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
@@ -71,8 +76,11 @@ class GpuPage(webapp2.RequestHandler):
         if len(gpu) == 0:
             self.redirect('/gpu')
             return
+        user = User.get_user(self)
         data = {
-            "gpu": gpu[0]
+            "gpu": gpu[0],
+            'url': user["url"],
+            'url_string': user['url_string'],
         }
         logging.info(gpu[0].name)
         self.response.write(template.render(data))
@@ -151,6 +159,9 @@ class GpuPage(webapp2.RequestHandler):
                 "errors": GpuPage.errors
             }
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
+        user = User.get_user(self)
+        date["url"] = user["url"]
+        date["url_string"] = user["url_string"]
         self.response.write(template.render(data))
 
     def get_view(self):
@@ -166,15 +177,19 @@ class GpuPage(webapp2.RequestHandler):
         if len(gpu) == 0:
             self.redirect('/gpu')
             return
+        user = User.get_user(self)
         data = {
-            "gpu": gpu[0]
+            "gpu": gpu[0],
+            'url': user["url"],
+            'url_string': user['url_string'],
         }
         logging.info(gpu[0].name)
         self.response.write(template.render(data))
 
     def get_search(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/search.html')
-        self.response.write(template.render({}))
+        user = User.get_user(self)
+        self.response.write(template.render({'url': user["url"],'url_string': user['url_string']}))
 
     def gpu_selection(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
@@ -190,9 +205,12 @@ class GpuPage(webapp2.RequestHandler):
             else:
                 self.redirect('/gpu/compare?' + "gpu1=" + gpu1 + "&" + "gpu2=" + gpu2)
                 return
+        user = User.get_user(self)
         data = {
             "gpus": query,
-            "errors": error
+            "errors": error,
+            'url': user["url"],
+            'url_string': user['url_string'],
         }
         self.response.write(template.render(data))
 
@@ -211,9 +229,12 @@ class GpuPage(webapp2.RequestHandler):
         if not Gpu1 or not Gpu2:
             self.redirect("/gpu")
             return
+        user = User.get_user(self)
         data = {
             "gpu1": Gpu1,
-            "gpu2": Gpu2
+            "gpu2": Gpu2,
+            'url': user["url"],
+            'url_string': user['url_string'],
         }
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/compare.html')
         self.response.write(template.render(data))
@@ -247,9 +268,9 @@ class GpuPage(webapp2.RequestHandler):
             result = query.fetch()
             if len(result) == 0:
                 error = "There is no GPU available with this selection"
-
+        user = User.get_user(self)
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/search.html')
-        self.response.write(template.render({"results":result,"errors":error}))
+        self.response.write(template.render({"results":result,"errors":error,'url': user["url"],'url_string': user['url_string']}))
 
 
 app = webapp2.WSGIApplication([
