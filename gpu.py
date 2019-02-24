@@ -145,23 +145,25 @@ class GpuPage(webapp2.RequestHandler):
                                   vertexPipelineStoresAndAtomics=vertexPipelineStoresAndAtomics)
 
                 newGpu.put()
-
+        user = User.get_user(self)
         if form_name == "new_gpu":
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
             data = {
-                "errors": GpuPage.errors
+                "errors": GpuPage.errors,
+                'url': user["url"],
+                'url_string': user['url_string'],
             }
         else:
             query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
             gpu = query.fetch()
             data = {
                 "gpu": gpu[0],
-                "errors": GpuPage.errors
+                "errors": GpuPage.errors,
+                'url': user["url"],
+                'url_string': user['url_string'],
             }
             template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/edit.html')
-        user = User.get_user(self)
-        date["url"] = user["url"]
-        date["url_string"] = user["url_string"]
+
         self.response.write(template.render(data))
 
     def get_view(self):
