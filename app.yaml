@@ -8,28 +8,32 @@ libraries:
 
 handlers:
 - url: /
-  script: home.app
-
-- url: /gpu
   script: src.gpu.app
+  login: required
 
 - url: /gpu/new
   script: src.gpu.app
+  login: required
 
 - url: /gpu/edit
   script: src.gpu.app
+  login: required
 
 - url: /gpu/view
   script: src.gpu.app
+  login: required
 
 - url: /gpu/search
   script: src.gpu.app
+  login: required
 
 - url: /gpu/compare
   script: src.gpu.app
+  login: required
 
 - url: /gpu/selection
   script: src.gpu.app
+  login: required
 
 - url: /assets
   static_dir: assets

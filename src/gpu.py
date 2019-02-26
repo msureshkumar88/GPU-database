@@ -15,7 +15,7 @@ class GpuPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         path = self.request.path
 
-        if path == "/gpu":
+        if path == "/gpu" or path == "/":
             self.index()
         elif path == "/gpu/new":
             self.new_gpu_get()
@@ -62,7 +62,7 @@ class GpuPage(webapp2.RequestHandler):
         params = self.request.params
         if len(params) > 0 and 'gpu_name' not in params:
             # logging.info(self.request.params['gpu_name'])
-            self.redirect('/gpu')
+            self.redirect('/')
             return
         user = User.get_user(self)
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/new.html')
@@ -74,7 +74,7 @@ class GpuPage(webapp2.RequestHandler):
         gpu = query.fetch()
         logging.info(gpu)
         if len(gpu) == 0:
-            self.redirect('/gpu')
+            self.redirect('/')
             return
         user = User.get_user(self)
         data = {
@@ -130,12 +130,12 @@ class GpuPage(webapp2.RequestHandler):
             GpuModel_key = ndb.Key('GpuModel', name)
             Gpu = GpuModel_key.get()
             if Gpu == None:
-                self.redirect("/gpu")
+                self.redirect("/")
         if len(GpuPage.errors) == 0:
             GpuModel_key = ndb.Key('GpuModel', name)
             Gpu = GpuModel_key.get()
             if form_name == "new_gpu" and Gpu != None:
-                GpuPage.errors.append("thia gpu already exist")
+                GpuPage.errors.append("This GPU already exists")
             else:
                 newGpu = GpuModel(id=name, name=name, manufacturer=manufacturer,
                                   date=datetime.datetime.strptime(date, '%Y-%m-%d'), geometryShader=geometryShader,
@@ -177,14 +177,14 @@ class GpuPage(webapp2.RequestHandler):
         params = self.request.params
         if len(params) > 0 and 'gpu_name' not in params:
             # logging.info(self.request.params['gpu_name'])
-            self.redirect('/gpu')
+            self.redirect('/')
             return
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/view.html')
         query = GpuModel.query(GpuModel.name == self.request.params['gpu_name'])
         gpu = query.fetch()
         logging.info(gpu)
         if len(gpu) == 0:
-            self.redirect('/gpu')
+            self.redirect('/')
             return
         user = User.get_user(self)
         data = {
@@ -227,7 +227,7 @@ class GpuPage(webapp2.RequestHandler):
         params = self.request.params
         if len(params) > 0 and 'gpu1' not in params or 'gpu2' not in params:
             # logging.info(self.request.params['gpu_name'])
-            self.redirect('/gpu')
+            self.redirect('/')
             return
         gpu1_key = ndb.Key('GpuModel', params['gpu1'])
         Gpu1 = gpu1_key.get()
@@ -236,7 +236,7 @@ class GpuPage(webapp2.RequestHandler):
         Gpu2 = gpu2_key.get()
 
         if not Gpu1 or not Gpu2:
-            self.redirect("/gpu")
+            self.redirect("/")
             return
         user = User.get_user(self)
         data = {
@@ -283,7 +283,7 @@ class GpuPage(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/gpu', GpuPage),
+    ('/', GpuPage),
     ('/gpu/new', GpuPage),
     ('/gpu/edit', GpuPage),
     ('/gpu/view', GpuPage),
