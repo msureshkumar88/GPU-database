@@ -2,7 +2,7 @@ import webapp2
 import template_engine
 from google.appengine.api import users
 from google.appengine.ext import ndb
-from userModel import UserModel
+from models.userModel import UserModel
 import logging
 
 class HomePage(webapp2.RequestHandler):

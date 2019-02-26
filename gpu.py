@@ -1,7 +1,7 @@
 import webapp2
 import template_engine
 import logging
-from gpuModel import GpuModel
+from models.gpuModel import GpuModel
 from google.appengine.ext import ndb
 from library.validation import Validation
 import datetime
