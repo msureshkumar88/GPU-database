@@ -210,7 +210,7 @@ class GpuPage(webapp2.RequestHandler):
         error = []
         if form:
             if gpu1 == gpu2:
-                error.append("Please select two type of GPUs to compare")
+                error.append("Please select two types of GPUs to compare")
             else:
                 self.redirect('/gpu/compare?' + "gpu1=" + gpu1 + "&" + "gpu2=" + gpu2)
                 return

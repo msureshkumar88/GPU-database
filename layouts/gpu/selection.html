@@ -1,4 +1,3 @@
-
 <!--<h2>Compares GPu Features</h2>-->
 <!--<div>-->
 <!--{% for err in errors %}-->
@@ -21,7 +20,6 @@
 <!--</div>-->
 
 
-
 {% extends "/includes/base.html" %}
 {% block title %}View GPU{% endblock %}
 {% block head %}
@@ -29,24 +27,38 @@
 {% block user_url %}{{url}}{% endblock %}{% block user_text %}{{url_string}}{% endblock %}
 
 {% block content %}
-<h2>Compares GPU Features</h2>
-<div>
-    {% for err in errors %}
-        <div>{{err}}</div>
-    {% endfor %}
-    <form method="post" action="/gpu/selection" name="compare">
-        <select name="gpu1">
-            {% for gpu in gpus %}
-            <option value="{{gpu.name}}">{{gpu.name}}</option>
-            {% endfor %}
-        </select>
-        <select name="gpu2">
-            {% for gpu in gpus %}
-            <option value="{{gpu.name}}">{{gpu.name}}</option>
-            {% endfor %}
-        </select>
-        <input type="hidden" name="form" value="compare_gpu">
-        <input type="submit">
-    </form>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Compares GPU Features</h2>
+        <div class="row">
+            <div class="col-md-10">
+                {% for err in errors %}
+                <div class="alert alert-danger">{{err}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <form method="post" action="/gpu/selection" name="compare">
+            <div class="row">
+                <div class="col-md-4">
+                    <select name="gpu1" class="form-control">
+                        {% for gpu in gpus %}
+                        <option value="{{gpu.name}}">{{gpu.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <select name="gpu2" class="form-control">
+                        {% for gpu in gpus %}
+                        <option value="{{gpu.name}}">{{gpu.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="hidden" name="form" value="compare_gpu">
+                <div class="col-md-4">
+                    <input class="btn btn-info" type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
