@@ -201,7 +201,7 @@ class GpuPage(webapp2.RequestHandler):
         self.response.write(template.render({'url': user["url"],'url_string': user['url_string']}))
 
     def gpu_selection(self):
-        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/gpu_selection.html')
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/selection.html')
         query = GpuModel.query(projection=[GpuModel.name])
         logging.info(query)
         form = self.request.get('form')
