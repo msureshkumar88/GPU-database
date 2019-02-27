@@ -1,4 +1,3 @@
-
 <!--<h1>Edit GPU</h1>-->
 <!--<form method="post" action="/gpu/edit?gpu_name={{gpu.name}}">-->
 
@@ -30,31 +29,79 @@
 {% block user_url %}{{url}}{% endblock %}{% block user_text %}{{url_string}}{% endblock %}
 
 {% block content %}
-<h1>Edit GPU</h1>
-<form method="post" action="/gpu/edit?gpu_name={{gpu.name}}">
+<div class="row">
+    <div class="col-md-6">
+        <h1>Edit GPU</h1>
+        <form method="post" action="/gpu/edit?gpu_name={{gpu.name}}">
 
-    {% for err in errors %}
-    <div>{{err}}</div>
-    {% endfor %}
-    Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>
-    <br/>
-    Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}"/>
-    <br/>
-    date issued:<input type="date" name="date" onkeydown="return false" value="{{gpu.date}}"/>
-    <br/>
-    <br/>
-    <input type="checkbox" name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry
-    Shader<br>
-    <input type="checkbox" name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation
-    Shader,<br>
-    <input type="checkbox" name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>
-    <input type="checkbox" name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse
-    Binding<br>
-    <input type="checkbox" name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif
-           %}>Texture Compression ETC2<br>
-    <input type="checkbox" name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics
-           %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>
-    <input type="submit"/>
-    <input type="hidden" name="form" value="edit_gpu">
-</form>
+            {% for err in errors %}
+            <div>{{err}}</div>
+            {% endfor %}
+            {% if message %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" disabled id="name" value="{{gpu.name}}" name="name"
+                       placeholder="Enter name">
+            </div>
+
+            <div class="form-group">
+                <label for="manufacturer">Manufacturer:</label>
+                <input type="text" name="manufacturer" class="form-control" id="manufacturer"
+                       placeholder="Enter manufacturer" value="{{gpu.manufacturer}}">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date issued:</label>
+                <input type="date" name="date" class="form-control" id="date" onkeydown="return false"
+                       value="{{gpu.date}}">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}
+                       class="form-check-input" id="geometryShader">
+                <label class="form-check-label" for="geometryShader">Geometry Shader</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="yes" {% if gpu.tesselationShader %}checked{%
+                       endif %} name="tesselationShader"
+                       id="tesselationShader">
+                <label class="form-check-label" for="tesselationShader">Tesselation Shader</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}
+                       name="shaderInt16" id="shaderInt16">
+                <label class="form-check-label" for="shaderInt16">ShaderInt 16</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="yes" {% if gpu.sparseBinding %}checked{% endif %}
+                       name="sparseBinding" id="sparseBinding">
+                <label class="form-check-label" for="sparseBinding">Sparse Binding</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="yes" {% if gpu.textureCompressionETC2 %}checked{%
+                       endif %} name="textureCompressionETC2"
+                       id="textureCompressionETC2">
+                <label class="form-check-label" for="textureCompressionETC2">Texture Compression ETC2</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="yes" {% if gpu.vertexPipelineStoresAndAtomics
+                       %}checked{% endif %} name="vertexPipelineStoresAndAtomics"
+                       id="vertexPipelineStoresAndAtomics">
+                <label class="form-check-label" for="vertexPipelineStoresAndAtomics">Vertex Pipeline Stores And
+                    Atomics</label>
+            </div>
+            <input type="submit" class="btn btn-primary"/>
+            <input type="hidden" name="form" value="edit_gpu">
+        </form>
+    </div>
+
+</div>
 {% endblock %}
