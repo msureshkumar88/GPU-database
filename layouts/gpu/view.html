@@ -1,23 +1,22 @@
-
 <!--<h1>View GPU</h1>-->
 <!--<div>-->
-    <!--{% for err in errors %}-->
-        <!--<div>{{err}}</div>-->
-    <!--{% endfor %}-->
-    <!--Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>-->
-    <!--<br/>-->
-    <!--Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}" disabled/>-->
-    <!--<br/>-->
-    <!--date issued:<input type="date" name="date" onkeydown="return false"  value="{{gpu.date}}" disabled/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<input type="checkbox" disabled name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry Shader<br>-->
-    <!--<input type="checkbox" disabled name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation Shader,<br>-->
-    <!--<input type="checkbox" disabled name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>-->
-    <!--<input type="checkbox" disabled name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse Binding<br>-->
-    <!--<input type="checkbox" disabled name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif %}>Texture Compression ETC2<br>-->
-    <!--<input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>-->
-    <!--<a href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>-->
+<!--{% for err in errors %}-->
+<!--<div>{{err}}</div>-->
+<!--{% endfor %}-->
+<!--Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>-->
+<!--<br/>-->
+<!--Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}" disabled/>-->
+<!--<br/>-->
+<!--date issued:<input type="date" name="date" onkeydown="return false"  value="{{gpu.date}}" disabled/>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<input type="checkbox" disabled name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry Shader<br>-->
+<!--<input type="checkbox" disabled name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation Shader,<br>-->
+<!--<input type="checkbox" disabled name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>-->
+<!--<input type="checkbox" disabled name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse Binding<br>-->
+<!--<input type="checkbox" disabled name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif %}>Texture Compression ETC2<br>-->
+<!--<input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>-->
+<!--<a href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>-->
 <!--</div>-->
 
 {% extends "/includes/base.html" %}
@@ -28,20 +27,20 @@
 
 {% block content %}
 
-    <!--Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>-->
-    <!--<br/>-->
-    <!--Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}" disabled/>-->
-    <!--<br/>-->
-    <!--date issued:<input type="date" name="date" onkeydown="return false"  value="{{gpu.date}}" disabled/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<input type="checkbox" disabled name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry Shader<br>-->
-    <!--<input type="checkbox" disabled name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation Shader,<br>-->
-    <!--<input type="checkbox" disabled name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>-->
-    <!--<input type="checkbox" disabled name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse Binding<br>-->
-    <!--<input type="checkbox" disabled name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif %}>Texture Compression ETC2<br>-->
-    <!--<input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>-->
-    <!--<a href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>-->
+<!--Name:<input type="text" name="name" value="{{gpu.name}}" disabled/>-->
+<!--<br/>-->
+<!--Manufacturer:<input type="text" name="manufacturer" value="{{gpu.manufacturer}}" disabled/>-->
+<!--<br/>-->
+<!--date issued:<input type="date" name="date" onkeydown="return false"  value="{{gpu.date}}" disabled/>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<input type="checkbox" disabled name="geometryShader" value="yes" {% if gpu.geometryShader %}checked{% endif %}>Geometry Shader<br>-->
+<!--<input type="checkbox" disabled name="tesselationShader" value="yes" {% if gpu.tesselationShader %}checked{% endif %}>Tesselation Shader,<br>-->
+<!--<input type="checkbox" disabled name="shaderInt16" value="yes" {% if gpu.shaderInt16 %}checked{% endif %}>ShaderInt 16<br>-->
+<!--<input type="checkbox" disabled name="sparseBinding" value="yes" {% if gpu.sparseBinding %}checked{% endif %}>Sparse Binding<br>-->
+<!--<input type="checkbox" disabled name="textureCompressionETC2" value="yes" {% if gpu.textureCompressionETC2 %}checked{% endif %}>Texture Compression ETC2<br>-->
+<!--<input type="checkbox" disabled name="vertexPipelineStoresAndAtomics" value="yes" {% if gpu.vertexPipelineStoresAndAtomics %}checked{% endif %}>Vertex Pipeline Stores And Atomics<br>-->
+<!--<a href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>-->
 <div class="row">
     <div class="col-md-6">
         <h2>{{gpu.name}}</h2>
@@ -50,87 +49,79 @@
         <a class="btn btn-info" href="/gpu/edit?gpu_name={{gpu.name}}">Edit</a>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-7">
-        <div class="card">
-            <div class="card-body">
-                Manufacturer: {{gpu.manufacturer}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                Issued Date: {{gpu.date}}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                Geometry Shader:
-
-                {% if gpu.geometryShader %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                Tesselation Shader:
-
-                {% if gpu.tesselationShader %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-               ShaderInt 16:
-
-                {% if gpu.shaderInt16 %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                Sparse Binding:
-
-                {% if gpu.sparseBinding %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                Texture Compression ETC2:
-
-                {% if gpu.textureCompressionETC2 %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                 Vertex Pipeline Stores And Atomics
-
-                {% if gpu.vertexPipelineStoresAndAtomics %}
-                    Available
-                {% else %}
-                    Not available
-                {% endif %}
-            </div>
-        </div>
-
+<div class="row" >
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <td>Manufacturer</td>
+                <td>{{gpu.manufacturer}}</td>
+            </tr>
+            <tr>
+                <td>Issued Date</td>
+                <td>{{gpu.date}}</td>
+            </tr>
+            <tr>
+                <td>Geometry Shader</td>
+                <td>
+                    {% if gpu.geometryShader %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Tesselation Shader</td>
+                <td>
+                    {% if gpu.tesselationShader %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>ShaderInt 16</td>
+                <td>
+                    {% if gpu.shaderInt16 %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Sparse Binding</td>
+                <td>
+                    {% if gpu.sparseBinding %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Texture Compression ETC2</td>
+                <td>
+                    {% if gpu.textureCompressionETC2 %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Vertex Pipeline Stores And Atomics</td>
+                <td>
+                    {% if gpu.vertexPipelineStoresAndAtomics %}
+                        Available
+                    {% else %}
+                        Not available
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
     </div>
-</div>
 
+</div>
 {% endblock %}
