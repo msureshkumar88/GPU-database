@@ -1,4 +1,3 @@
-
 <!--<h2>Search GPU by Features</h2>-->
 <!--<div>-->
 
@@ -26,7 +25,6 @@
 <!--</div>-->
 
 
-
 {% extends "/includes/base.html" %}
 {% block title %}View GPU{% endblock %}
 {% block head %}
@@ -35,28 +33,51 @@
 
 {% block content %}
 <h3>Search GPU by Features</h3>
-<div>
+<div class="row">
+    <div class="col-md-9">
 
-    {% if errors %}
-    {{errors}}
-    {% endif %}
-    <form name="search" method="post" action="">
-        <input type="checkbox" name="geometryShader" value="yes">Geometry Shader
-        <input type="checkbox" name="tesselationShader" value="yes">Tesselation Shader,
-        <input type="checkbox" name="shaderInt16" value="yes">ShaderInt 16
-        <input type="checkbox" name="sparseBinding" value="yes">Sparse Binding
-        <input type="checkbox" name="textureCompressionETC2" value="yes">Texture Compression ETC2
-        <input type="checkbox" name="vertexPipelineStoresAndAtomics" value="yes">Vertex Pipeline Stores And Atomics
-        <input type="hidden" name="form" value="search_feature">
-        <input type="submit" value="Search">
-    </form>
+        {% if errors %}
+        <div class="alert alert-danger">{{errors}}</div>
+        {% endif %}
 
+        <form class="form-inline" name="search" method="post" action="">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="geometryShader" type="checkbox" name="geometryShader" value="yes">
+              <label class="form-check-label" for="geometryShader">Geometry Shader</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="tesselationShader" type="checkbox" name="tesselationShader" value="yes">
+                <label class="form-check-label" for="tesselationShader">Tesselation Shader</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="shaderInt16" type="checkbox" name="shaderInt16" value="yes">
+                <label class="form-check-label" for="shaderInt16">ShaderInt 16</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="sparseBinding" type="checkbox" name="sparseBinding" value="yes">
+                <label class="form-check-label" for="sparseBinding">Sparse Binding</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="textureCompressionETC2" type="checkbox" name="textureCompressionETC2" value="yes">
+                <label class="form-check-label" for="textureCompressionETC2">Texture Compression ETC2</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="vertexPipelineStoresAndAtomics" name="vertexPipelineStoresAndAtomics" value="yes">
+                <label class="form-check-label" for="vertexPipelineStoresAndAtomics">Vertex Pipeline Stores And Atomics</label>
+            </div>
+            <input type="hidden" name="form" value="search_feature">
+            <input class="btn btn-info" type="submit" value="Search">
+        </form>
+    </div>
 </div>
-<div>
-    <ul>
-        {% for result in results %}
-        <li>{{result.name}}</li>
-        {% endfor %}
-    </ul>
+<br/>
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for val in results %}
+            <li class="list-group-item"><a href="/gpu/view?gpu_name={{ val.name }}">{{ val.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
