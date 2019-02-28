@@ -15,8 +15,10 @@ class GpuPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         path = self.request.path
 
-        if path == "/gpu" or path == "/":
+        if path == "/":
             self.index()
+        elif path == "/gpu":
+            self.gpu_list()
         elif path == "/gpu/new":
             self.new_gpu_get()
         elif "/gpu/edit" in path:
@@ -43,13 +45,21 @@ class GpuPage(webapp2.RequestHandler):
             self.gpu_selection()
 
     def index(self):
+        template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/home.html')
+        user = User.get_user(self)
+        data = {
+            'url': user["url"],
+            'url_string': user['url_string'],
+        }
+        self.response.write(template.render(data))
+
+    def gpu_list(self):
         template = template_engine.JINJA_ENVIRONMENT.get_template('layouts/gpu/index.html')
         query = GpuModel.query()
         gpus = query.fetch()
         logging.info(query.fetch(projection=[GpuModel.name]))
         for val in query.fetch(projection=[GpuModel.name]):
             logging.info(val.name)
-
         user = User.get_user(self)
         data = {
             "gpus": gpus,
@@ -284,6 +294,7 @@ class GpuPage(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', GpuPage),
+    ('/gpu', GpuPage),
     ('/gpu/new', GpuPage),
     ('/gpu/edit', GpuPage),
     ('/gpu/view', GpuPage),
